@@ -63,6 +63,70 @@ function renderCharBio(data) {
 
     // Append to page
     charBioEl.append(charBioContent);
+};
+
+// ===========================================================================================
+// make an api call to the amazon price api 
+// refrain from using this as much as possible and use the getAmazonTest() function
+function getAmazonApi(str){
+    str = str.trim();
+    var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=" + str;
+
+    fetch(api, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "06a5507a5emsh840791a7a3fd071p1e73d1jsn1809fb7fcf9b",
+            "x-rapidapi-host": "amazon-price1.p.rapidapi.com"
+        }
+    })
+    .then(function (response) {
+        return response.json(); // add error handling
+    })
+    .then(function (data) {
+        // renderMerch(data); pass the json data into the render function
+    });
+};
+
+// test search term is "Spider-Man" use this to test 
+function getAmazonTest() {
+    var api = "./assets/js/response.json";
+
+    fetch(api)
+     .then(function (response) {
+        return response.json();
+     })
+     .then(function (data) {
+        console.log(data);
+        renderMerch(data)
+     });
 
 };
 
+// takes json data from getAmazonApi function
+function renderMerch(data) {
+    for (var i=0; i<5; i++) {
+        var container = $("#merchandiseArea"); // html element reference
+        var imageUrl = data[i].imageUrl; 
+        var price = data[i].price;
+        var title = data[i].title;
+
+        // if the title is very long, shortens it
+        if (title.length > 25) {
+            title = title.slice(0,25) + "...";
+        };
+        
+        // render the title, price and thumbnail into the element
+        container.append(`
+            <div class="column is-one-fifth">
+                <div class="tile has-background-success">
+                    <p class="title is-5">${title} \n ${price}</p>
+                    <img src="${imageUrl}">
+                </div>
+            </div>
+        `);
+    };
+
+    
+}
+
+getAmazonTest();
