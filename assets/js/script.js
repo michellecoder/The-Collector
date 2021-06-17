@@ -1,10 +1,15 @@
 // Change to your public marvel key.
 var marvelApiKey = '0283a5777660227fbb1d7d136564ec70'
-var characterName = 'Spider Man'
 
-var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&apikey=${marvelApiKey}`
+$('#character-input-form').submit(handleSubmit)
 
-fetch(requestUrl)
+function handleSubmit(event){
+    event.preventDefault()
+
+    var characterName = $('#character-input').val()
+    var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&apikey=${marvelApiKey}`
+
+    fetch(requestUrl)
     .then(function(response){
         // Basic error handling, needs refinement based on return code.
         if (response.status !== 200) {
@@ -23,3 +28,4 @@ fetch(requestUrl)
         }
         return data
     })
+}
