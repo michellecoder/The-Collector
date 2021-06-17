@@ -25,6 +25,7 @@ function handleSubmit(event){
         // Triggers if the data recieved from request has no matching entries.
         if (data.data.count === 0) {
             console.log("No entires by that name, check spelling and try again.")
+            return
         }
         renderCharBio(data)
         return data
@@ -66,3 +67,12 @@ function renderCharBio(data) {
 
 };
 
+var availableTags = [
+    "Spider-Man",
+    "Hulk",
+    "Iron Man",
+  ];
+
+$('#character-input').autocomplete({
+    source: availableTags
+})
