@@ -88,6 +88,7 @@ function getAmazonApi(str){
 };
 
 // test search term is "Spider-Man" use this to test 
+// uses the response.json file in assets/js
 function getAmazonTest() {
     var api = "./assets/js/response.json";
 
@@ -104,11 +105,12 @@ function getAmazonTest() {
 
 // takes json data from getAmazonApi function
 function renderMerch(data) {
-    for (var i=0; i<5; i++) {
+    for (var i=0; i<10; i++) {
         var container = $("#merchandiseArea"); // html element reference
-        var imageUrl = data[i].imageUrl; 
-        var price = data[i].price;
-        var title = data[i].title;
+        var shopUrl = data[i].detailPageURL; // url to amazon store page
+        var imageUrl = data[i].imageUrl; // thumbnail of product
+        var price = data[i].price; // price of product
+        var title = data[i].title; // title/name of product
 
         // if the title is very long, shortens it
         if (title.length > 25) {
@@ -117,11 +119,11 @@ function renderMerch(data) {
         
         // render the title, price and thumbnail into the element
         container.append(`
-            <div class="column is-one-fifth">
-                <div class="tile has-background-success">
-                    <p class="title is-5">${title} \n ${price}</p>
+            <div class="column is-one-fifth is-flex">
+                <a href="${shopUrl}"><div class="tile has-background-success">
+                    <p class="title is-5">${title} ${price}</p>
                     <img src="${imageUrl}">
-                </div>
+                </div></a> 
             </div>
         `);
     };
