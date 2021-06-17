@@ -1,11 +1,15 @@
+// Change to your public marvel key.
+var marvelApiKey = '0283a5777660227fbb1d7d136564ec70'
 
-var marvelApiKey = '86c032a44e705743b4136c5508731395'
-var characterName = 'hulk';
+$('#character-input-form').submit(handleSubmit)
 
+function handleSubmit(event){
+    event.preventDefault()
 
-var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&apikey=${marvelApiKey}`
+    var characterName = $('#character-input').val()
+    var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${characterName}&apikey=${marvelApiKey}`
 
-fetch(requestUrl)
+    fetch(requestUrl)
     .then(function(response){
         // Basic error handling, needs refinement based on return code.
         if (response.status !== 200) {
@@ -25,6 +29,7 @@ fetch(requestUrl)
         renderCharBio(data)
         return data
     })
+}
 
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
@@ -60,3 +65,4 @@ function renderCharBio(data) {
     charBioEl.append(charBioContent);
 
 };
+
