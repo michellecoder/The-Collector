@@ -26,7 +26,8 @@ function handleSubmit(event){
         if (data.data.count === 0) {
             console.log("No entires by that name, check spelling and try again.")
         }
-        renderCharBio(data)
+        renderCharBio(data);
+        addSearchHistory(data.data.results[0].name);
         return data
     })
 }
@@ -62,7 +63,37 @@ function renderCharBio(data) {
     `);
 
     // Append to page
-    charBioEl.append(charBioContent);
+    charBioEl.html(charBioContent);
 
 };
 
+// Function 'addSearchHistory' receives the character name from 'handleSubmit' function. If name is not a duplicate, it is added to local storage array 'marvelSearchHistory'.
+function addSearchHistory(characterName){
+
+    // Declare variables
+    var searchArray = [];
+    var storedSearches = JSON.parse(localStorage.getItem("marvelSearchHistory"));
+    var storeChar = characterName;
+
+
+    // If local storage is empty, populate with current search character
+    if (storedSearches == null) {
+        searchArray.push(storeChar);
+        localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+    // If local storage is not empty, add current search character to end
+    } else {
+        searchArray = storedSearches;
+
+        for (i = 0; i < searchArray.length; i++) {
+            if (storeChar === searchArray[i]) {
+                return;
+            }
+        }
+
+        searchArray.push(storeChar);
+        localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+    }
+
+	// Render search history
+	// renderSearchHistory();
+}
