@@ -26,7 +26,9 @@ function handleSubmit(event){
         if (data.data.count === 0) {
             console.log("No entires by that name, check spelling and try again.")
         }
-        renderCharBio(data)
+        renderCharBio(data);
+        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+        getAmazonTest(); // for testing delete before submitting
         return data
     })
 }
@@ -87,8 +89,9 @@ function getAmazonApi(str){
     });
 };
 
-// test search term is "Spider-Man" use this to test 
-// uses the response.json file in assets/js
+// uses the response.json or response2.json file in assets/js
+// test search term is "Spider-Man" for response.json and "Hulk" for response2.json use this to test
+// delete before submitting
 function getAmazonTest() {
     var api = "./assets/js/response2.json";
 
@@ -97,8 +100,8 @@ function getAmazonTest() {
         return response.json();
      })
      .then(function (data) {
-        console.log(data);
-        // renderMerch(data)
+        console.log(data); 
+        renderMerch(data)
      });
 
 };
@@ -121,7 +124,7 @@ function renderMerch(data) {
         
         // render the title, price and thumbnail into the element
         container.append(`
-            <div class="column is-one-fifth is-flex">
+            <div class="column is-one-fifth">
                 <a href="${shopUrl}" target="_blank">
                     <article class="message is-dark">
                         <div class="message-header">
@@ -136,8 +139,4 @@ function renderMerch(data) {
             </div>
         `);
     };
-
-    
-}
-
-getAmazonTest();
+};
