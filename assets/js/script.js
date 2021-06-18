@@ -90,7 +90,7 @@ function getAmazonApi(str){
 // test search term is "Spider-Man" use this to test 
 // uses the response.json file in assets/js
 function getAmazonTest() {
-    var api = "./assets/js/response.json";
+    var api = "./assets/js/response2.json";
 
     fetch(api)
      .then(function (response) {
@@ -122,7 +122,7 @@ function renderMerch(data) {
         // render the title, price and thumbnail into the element
         container.append(`
             <div class="column is-one-fifth is-flex">
-                <a href="${shopUrl}"><div class="tile has-background-success">
+                <a href="${shopUrl}" target="_blank"><div class="tile has-background-success">
                     <p class="title is-5">${title} ${price}</p>
                     <img src="${imageUrl}">
                 </div></a> 
