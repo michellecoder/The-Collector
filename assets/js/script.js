@@ -105,8 +105,10 @@ function getAmazonTest() {
 
 // takes json data from getAmazonApi function
 function renderMerch(data) {
+    var container = $("#merchandiseArea"); // html element reference
+    container.html(''); // clear container before appending more
+
     for (var i=0; i<10; i++) {
-        var container = $("#merchandiseArea"); // html element reference
         var shopUrl = data[i].detailPageURL; // url to amazon store page
         var imageUrl = data[i].imageUrl; // thumbnail of product
         var price = data[i].price; // price of product
