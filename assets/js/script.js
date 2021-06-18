@@ -83,7 +83,7 @@ function getAmazonApi(str){
         return response.json(); // add error handling
     })
     .then(function (data) {
-        // renderMerch(data); pass the json data into the render function
+        renderMerch(data);// pass the json data into the render function
     });
 };
 
@@ -98,34 +98,41 @@ function getAmazonTest() {
      })
      .then(function (data) {
         console.log(data);
-        renderMerch(data)
+        // renderMerch(data)
      });
 
 };
 
-// takes json data from getAmazonApi function
+// takes json data from getAmazonApi function and renders to the page
 function renderMerch(data) {
     var container = $("#merchandiseArea"); // html element reference
     container.html(''); // clear container before appending more
 
-    for (var i=0; i<10; i++) {
+    for (var i=0; i<data.length; i++) {
         var shopUrl = data[i].detailPageURL; // url to amazon store page
         var imageUrl = data[i].imageUrl; // thumbnail of product
         var price = data[i].price; // price of product
         var title = data[i].title; // title/name of product
 
         // if the title is very long, shortens it
-        if (title.length > 25) {
-            title = title.slice(0,25) + "...";
+        if (title.length > 35) {
+            title = title.slice(0,35) + "...";
         };
         
         // render the title, price and thumbnail into the element
         container.append(`
             <div class="column is-one-fifth is-flex">
-                <a href="${shopUrl}" target="_blank"><div class="tile has-background-success">
-                    <p class="title is-5">${title} ${price}</p>
-                    <img src="${imageUrl}">
-                </div></a> 
+                <a href="${shopUrl}" target="_blank">
+                    <article class="message is-dark">
+                        <div class="message-header">
+                            <p>${title}</p>
+                        </div>
+                        <div class="message-body">
+                            <img src="${imageUrl}"><br>
+                            <p>${price}</p>
+                        </div>
+                    </article>
+                </a>
             </div>
         `);
     };
