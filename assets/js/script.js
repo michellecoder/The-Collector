@@ -29,13 +29,11 @@ function handleSubmit(event){
         renderCharBio(data);
         addSearchHistory(data.data.results[0].name);
        
+        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+        getAmazonTest(); // for testing delete before submitting
         return data
     })
 }
-
- // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
- getAmazonTest(); // for testing delete before submitting
-
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
 function renderCharBio(data) {
@@ -152,8 +150,9 @@ function handleHistoryButton(event) {
     })
 
     .then(function(data){
-        console.log(data)
         renderCharBio(data);
+        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+        getAmazonTest(); // for testing delete before submitting
         return data
     })
 }
