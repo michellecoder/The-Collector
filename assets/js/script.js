@@ -67,15 +67,15 @@ function renderCharBio(data) {
     var charBioContent = $(`
         <!-- Hero Section to display character name -->
         <section class="hero is-medium is-danger">
-        <div class="hero-body">
-        <p class="title">
-            ${charName}
-        </p>
-        <p class="subtitle">
-            ${charBio}
-        </p>
-        </div>
-    </section>
+            <div class="hero-body">
+            <p class="title">
+                ${charName}
+            </p>
+            <p class="subtitle">
+                ${charBio}
+            </p>
+            </div>
+        </section>
 
     `);
 
@@ -166,6 +166,7 @@ function handleHistoryButton(event) {
     })
 
     .then(function(data){
+        renderCharImage(data);
         renderCharBio(data);
         // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
         getAmazonTest(); // for testing delete before submitting
