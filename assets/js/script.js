@@ -49,7 +49,7 @@ function renderCharBio(data) {
     // Create template literal to append
     var charBioContent = $(`
         <!-- Hero Section to display character name -->
-        <section class="hero is-danger">
+        <section class="hero is-medium is-danger">
         <div class="hero-body">
         <p class="title">
             ${charName}
@@ -84,6 +84,7 @@ function addSearchHistory(characterName){
     } else {
         searchArray = storedSearches;
 
+        // Check for duplicates
         for (i = 0; i < searchArray.length; i++) {
             if (storeChar === searchArray[i]) {
                 return;
@@ -95,5 +96,67 @@ function addSearchHistory(characterName){
     }
 
 	// Render search history
-	// renderSearchHistory();
+	renderSearchHistory();
 }
+
+// Function 'renderSearchHistory' will display all previously stored searched to the page. 
+function renderSearchHistory() {
+
+	// Declare element to append to
+	var searchHistoryEl = $('#search-history'); 
+
+	// Retrieve stored search history from local storage
+	var storedSearch = JSON.parse(localStorage.getItem("marvelSearchHistory"));
+
+	// Reset container
+	searchHistoryEl.html('');
+
+	// Loop through search array
+	for (i = 0; i < storedSearch.length; i++) {
+
+		// Declare variable
+		var displayChar = storedSearch[i];
+
+		// Declare template literal to append
+		var searchHistoryContent = $(`
+		<button class="button is-danger is-outlined history-button" data-search-value="${displayChar}">${displayChar}</button>
+		`);
+
+		// Append to page
+		searchHistoryEl.append(searchHistoryContent);
+	
+	}
+}
+
+// Function 'handleHistoryButton' will retrieve 'data-search-value' from a clicked history button, recall the API and pass data to 'renderCharBio'
+function handleHistoryButton(event) {
+    
+    // Declare variable
+    var clickValue = event.target.getAttribute("data-search-value");
+
+    // Ensure button was clicked
+    if (clickValue == 'container') {
+        return;
+    }
+
+    console.log(clickValue);
+
+    // Fetch API
+    var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${clickValue}&apikey=${marvelApiKey}`
+
+    fetch(requestUrl)
+    .then(function(response){
+        
+        return response.json()
+    })
+
+    .then(function(data){
+        console.log(data)
+        renderCharBio(data);
+        return data
+    })
+
+}
+
+var historyButtonsEl = $('#search-history');
+historyButtonsEl.click(handleHistoryButton);
