@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <title>The Collector</title>
@@ -19,6 +20,7 @@
                     Search The Marvel Universe
                 </p>
             </header>
+<<<<<<< HEAD
             <!-- Form for inputting a character name to be searched -->
             <div class="card-content">
                 <form id="character-input-form">
@@ -30,7 +32,31 @@
                     </div>
                 </form>
             </div>
+=======
+                <!-- Form for inputting a character name to be searched -->
+                <div class="card-content">
+                    <form id="character-input-form">
+                        <div class="control">
+                            <input class="input" id="character-input" type="text" placeholder="Text input">
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Container for displaying previous search history -->
+                <div class="card-content" id="search-history" data-search-value="container">
+                    <!-- Populated by 'renderSearchHistory' JS function -->
+                </div>
+>>>>>>> ecfa7cf09da82bb72028ca12f61b37180d50a02c
         </div>
+
+         <!-- Search History Section 
+        <div id = "search-history"> -->
+            <!-- This will be left empty & filled from the 'renderSearchHistory' JS function -->
+        <!-- </div> -->
+        <!--  End of Search History Section  -->
 
         <!--  Character Bio Section  -->
         <div id="character-bio">
