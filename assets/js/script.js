@@ -27,7 +27,9 @@ function handleSubmit(event){
             console.log("No entires by that name, check spelling and try again.")
             return
         }
-        renderCharBio(data)
+        renderCharBio(data);
+        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+        getAmazonTest(); // for testing delete before submitting
         return data
     })
 }
@@ -64,7 +66,80 @@ function renderCharBio(data) {
 
     // Append to page
     charBioEl.append(charBioContent);
+};
 
+// ===========================================================================================
+// make an api call to the amazon price api 
+// refrain from using this as much as possible and use the getAmazonTest() function
+function getAmazonApi(str){
+    str = str.trim();
+    var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=" + str;
+
+    fetch(api, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "06a5507a5emsh840791a7a3fd071p1e73d1jsn1809fb7fcf9b",
+            "x-rapidapi-host": "amazon-price1.p.rapidapi.com"
+        }
+    })
+    .then(function (response) {
+        return response.json(); // add error handling
+    })
+    .then(function (data) {
+        renderMerch(data);// pass the json data into the render function
+    });
+};
+
+// uses the response.json or response2.json file in assets/js
+// test search term is "Spider-Man" for response.json and "Hulk" for response2.json use this to test
+// delete before submitting
+function getAmazonTest() {
+    var api = "./assets/js/response2.json";
+
+    fetch(api)
+     .then(function (response) {
+        return response.json();
+     })
+     .then(function (data) {
+        console.log(data); 
+        renderMerch(data)
+     });
+
+};
+
+// takes json data from getAmazonApi function and renders to the page
+function renderMerch(data) {
+    var container = $("#merchandiseArea"); // html element reference
+    container.html(''); // clear container before appending more
+
+    for (var i=0; i<data.length; i++) {
+        var shopUrl = data[i].detailPageURL; // url to amazon store page
+        var imageUrl = data[i].imageUrl; // thumbnail of product
+        var price = data[i].price; // price of product
+        var title = data[i].title; // title/name of product
+
+        // if the title is very long, shortens it
+        if (title.length > 35) {
+            title = title.slice(0,35) + "...";
+        };
+        
+        // render the title, price and thumbnail into the element
+        container.append(`
+            <div class="column is-one-fifth">
+                <a href="${shopUrl}" target="_blank">
+                    <article class="message is-dark">
+                        <div class="message-header">
+                            <p>${title}</p>
+                        </div>
+                        <div class="message-body">
+                            <img src="${imageUrl}"><br>
+                            <p>${price}</p>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        `);
+    };
 };
 
 var availableTags = [
@@ -111,3 +186,4 @@ function getCharacterList() {
         return data
     })
 }
+
