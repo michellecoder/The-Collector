@@ -26,6 +26,7 @@ function handleSubmit(event){
         if (data.data.count === 0) {
             console.log("No entires by that name, check spelling and try again.")
         }
+        renderCharImage(data);
         renderCharBio(data);
         addSearchHistory(data.data.results[0].name);
        
@@ -33,6 +34,21 @@ function handleSubmit(event){
         getAmazonTest(); // for testing delete before submitting
         return data
     })
+}
+
+function renderCharImage(data) {
+    // image link is data.data.results[0].thumbnail.path + '.' + data.data.results[0].thumbnail.extension
+    
+    var charImgEl = $('#character-img');
+    var imgInfo = data.data.results[0].thumbnail;
+    var imgUrl = imgInfo.path + '.' + imgInfo.extension;
+
+    var charBioContent = $(`
+        <!-- Display Character Image -->
+        <img class="charImg" src=${imgUrl}>
+    `);
+
+    charImgEl.html(charBioContent);
 }
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
