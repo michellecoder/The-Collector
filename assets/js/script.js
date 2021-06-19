@@ -158,5 +158,6 @@ function handleHistoryButton(event) {
 
 }
 
+// Variable & listener for 'handleHistoryButton'
 var historyButtonsEl = $('#search-history');
 historyButtonsEl.click(handleHistoryButton);
