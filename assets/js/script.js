@@ -236,31 +236,22 @@ function renderMerch(data) {
         `);
     };
 };
-<<<<<<< HEAD
 // ============================================================================
-var availableTags = [
-    "Spider-Man",
-    "Hulk",
-    "Iron Man",
-  ];
+var availableTags;
 
-$('#character-input').autocomplete({
-    source: availableTags
-})
+var autocompleteTimeout;
 
-var timeout;
+$('#character-input').keypress(handleInputKeypress)
 
-$('#character-input').keypress(handleKeypress)
-
-function handleKeypress() {
-    if (timeout) {
-        clearTimeout(timeout)
+function handleInputKeypress() {
+    if (autocompleteTimeout) {
+        clearTimeout(autocompleteTimeout)
     }
 
-    timeout = setTimeout(getCharacterList, 1000)
+    autocompleteTimeout = setTimeout(setAutocompleteFromApi, 1000)
 }
 
-function getCharacterList() {
+function setAutocompleteFromApi() {
     var characterName = $('#character-input').val()
     var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${characterName}&apikey=${marvelApiKey}`
 
@@ -276,20 +267,24 @@ function getCharacterList() {
         })
 
         .then(function(data){
+            // Loops through response to fill avaialable tags with returned names.
             availableTags = []
             for (var i = 0; i < data.data.results.length; i++) {
                 console.log(data.data.results[i].name)
                 availableTags[i] = data.data.results[i].name
             }
-            console.log(availableTags)
+
+            // Sets autocomplete with currently available tags.
+            $('#character-input').autocomplete({
+                source: availableTags
+            })
+
             return data
         })
 }
 
-=======
 
 
 // ---------------- On Page Load ----------------------------- //
 
 renderSearchHistory();
->>>>>>> ecfa7cf09da82bb72028ca12f61b37180d50a02c
