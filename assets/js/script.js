@@ -27,15 +27,14 @@ function handleSubmit(event){
             console.log("No entires by that name, check spelling and try again.")
         }
         renderCharBio(data);
-<<<<<<< HEAD
         addSearchHistory(data.data.results[0].name);
-=======
-        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
-        getAmazonTest(); // for testing delete before submitting
->>>>>>> 967fcd9f5b313119b1be4a4d45640583c979efec
+       
         return data
     })
 }
+
+ // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+ getAmazonTest(); // for testing delete before submitting
 
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
@@ -49,7 +48,6 @@ function renderCharBio(data) {
     var charName = charBioData.name;
     var charBio = charBioData.description;
     var comicCount = charBioData.comics.available
-    console.log(comicCount);
 
     // Create template literal to append
     var charBioContent = $(`
@@ -68,7 +66,6 @@ function renderCharBio(data) {
     `);
 
     // Append to page
-<<<<<<< HEAD
     charBioEl.html(charBioContent);
 
 };
@@ -145,8 +142,6 @@ function handleHistoryButton(event) {
         return;
     }
 
-    console.log(clickValue);
-
     // Fetch API
     var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${clickValue}&apikey=${marvelApiKey}`
 
@@ -161,15 +156,12 @@ function handleHistoryButton(event) {
         renderCharBio(data);
         return data
     })
-
 }
 
 // Variable & listener for 'handleHistoryButton'
 var historyButtonsEl = $('#search-history');
 historyButtonsEl.click(handleHistoryButton);
-=======
-    charBioEl.append(charBioContent);
-};
+
 
 // ===========================================================================================
 // make an api call to the amazon price api 
@@ -244,4 +236,8 @@ function renderMerch(data) {
         `);
     };
 };
->>>>>>> 967fcd9f5b313119b1be4a4d45640583c979efec
+
+
+// ---------------- On Page Load ----------------------------- //
+
+renderSearchHistory();
