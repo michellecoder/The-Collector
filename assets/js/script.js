@@ -141,7 +141,7 @@ function renderMerch(data) {
         `);
     };
 };
-
+// ============================================================================
 var availableTags = [
     "Spider-Man",
     "Hulk",
@@ -161,7 +161,7 @@ function handleKeypress() {
         clearTimeout(timeout)
     }
 
-    timeout = setInterval(getCharacterList, 1000)
+    timeout = setTimeout(getCharacterList, 1000)
 }
 
 function getCharacterList() {
@@ -169,21 +169,24 @@ function getCharacterList() {
     var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${characterName}&apikey=${marvelApiKey}`
 
     fetch(requestUrl)
-    .then(function(response){
-        // Basic error handling, needs refinement based on return code.
-        if (response.status !== 200) {
-            console.log('Error, check response for more info')
-            console.log(response)
-            return 
-        }
-        return response.json()
-    })
+        .then(function(response){
+            // Basic error handling, needs refinement based on return code.
+            if (response.status !== 200) {
+                console.log('Error, check response for more info')
+                console.log(response)
+                return 
+            }
+            return response.json()
+        })
 
-    .then(function(data){
-        for (var i = 0; i < data.results.length; i++) {
-            console.log(data.results[i])
-        }
-        return data
-    })
+        .then(function(data){
+            availableTags = []
+            for (var i = 0; i < data.data.results.length; i++) {
+                console.log(data.data.results[i].name)
+                availableTags[i] = data.data.results[i].name
+            }
+            console.log(availableTags)
+            return data
+        })
 }
 
