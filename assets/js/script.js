@@ -28,12 +28,13 @@ function handleSubmit(event){
             return
         }
         renderCharBio(data);
+        addSearchHistory(data.data.results[0].name);
+       
         // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
         getAmazonTest(); // for testing delete before submitting
         return data
     })
 }
-
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
 function renderCharBio(data) {
@@ -46,12 +47,11 @@ function renderCharBio(data) {
     var charName = charBioData.name;
     var charBio = charBioData.description;
     var comicCount = charBioData.comics.available
-    console.log(comicCount);
 
     // Create template literal to append
     var charBioContent = $(`
         <!-- Hero Section to display character name -->
-        <section class="hero is-danger">
+        <section class="hero is-medium is-danger">
         <div class="hero-body">
         <p class="title">
             ${charName}
@@ -65,8 +65,103 @@ function renderCharBio(data) {
     `);
 
     // Append to page
-    charBioEl.append(charBioContent);
+    charBioEl.html(charBioContent);
+
 };
+
+// Function 'addSearchHistory' receives the character name from 'handleSubmit' function. If name is not a duplicate, it is added to local storage array 'marvelSearchHistory'.
+function addSearchHistory(characterName){
+
+    // Declare variables
+    var searchArray = [];
+    var storedSearches = JSON.parse(localStorage.getItem("marvelSearchHistory"));
+    var storeChar = characterName;
+
+
+    // If local storage is empty, populate with current search character
+    if (storedSearches == null) {
+        searchArray.push(storeChar);
+        localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+    // If local storage is not empty, add current search character to end
+    } else {
+        searchArray = storedSearches;
+
+        // Check for duplicates
+        for (i = 0; i < searchArray.length; i++) {
+            if (storeChar === searchArray[i]) {
+                return;
+            }
+        }
+
+        searchArray.push(storeChar);
+        localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+    }
+
+	// Render search history
+	renderSearchHistory();
+}
+
+// Function 'renderSearchHistory' will display all previously stored searched to the page. 
+function renderSearchHistory() {
+
+	// Declare element to append to
+	var searchHistoryEl = $('#search-history'); 
+
+	// Retrieve stored search history from local storage
+	var storedSearch = JSON.parse(localStorage.getItem("marvelSearchHistory"));
+
+	// Reset container
+	searchHistoryEl.html('');
+
+	// Loop through search array
+	for (i = 0; i < storedSearch.length; i++) {
+
+		// Declare variable
+		var displayChar = storedSearch[i];
+
+		// Declare template literal to append
+		var searchHistoryContent = $(`
+		<button class="button is-danger is-outlined history-button" data-search-value="${displayChar}">${displayChar}</button>
+		`);
+
+		// Append to page
+		searchHistoryEl.append(searchHistoryContent);
+	
+	}
+}
+
+// Function 'handleHistoryButton' will retrieve 'data-search-value' from a clicked history button, recall the API and pass data to 'renderCharBio'
+function handleHistoryButton(event) {
+    
+    // Declare variable
+    var clickValue = event.target.getAttribute("data-search-value");
+
+    // Ensure button was clicked
+    if (clickValue == 'container') {
+        return;
+    }
+
+    // Fetch API
+    var requestUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${clickValue}&apikey=${marvelApiKey}`
+
+    fetch(requestUrl)
+    .then(function(response){
+        
+        return response.json()
+    })
+
+    .then(function(data){
+        renderCharBio(data);
+        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+        getAmazonTest(); // for testing delete before submitting
+        return data
+    })
+}
+
+// Variable & listener for 'handleHistoryButton'
+var historyButtonsEl = $('#search-history');
+historyButtonsEl.click(handleHistoryButton);
+
 
 // ===========================================================================================
 // make an api call to the amazon price api 
@@ -141,6 +236,7 @@ function renderMerch(data) {
         `);
     };
 };
+<<<<<<< HEAD
 // ============================================================================
 var availableTags = [
     "Spider-Man",
@@ -190,3 +286,10 @@ function getCharacterList() {
         })
 }
 
+=======
+
+
+// ---------------- On Page Load ----------------------------- //
+
+renderSearchHistory();
+>>>>>>> ecfa7cf09da82bb72028ca12f61b37180d50a02c
