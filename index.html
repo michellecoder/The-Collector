@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./normilization.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>The Collector</title>
 </head>
+
 <body>
+
+    <!-- Hero image header and sub header -->
+    <hero>
+        <hero-body>
+            <div class="hero-body hero is-large is-info">
+                <p class="title is-1">
+                    The Collector <br>
+                    <span class="title is-2">A Marvel Collector's Wonderland!</span>
+                </p>
+            </div>
+        </hero-body>
+    </hero>
+
     <main>
         <!-- Card containing the search input for API request -->
         <div class="card">
@@ -20,27 +42,27 @@
                     Search The Marvel Universe
                 </p>
             </header>
-                <!-- Form for inputting a character name to be searched -->
-                <div class="card-content">
-                    <form id="character-input-form">
-                        <div class="control">
-                            <input class="input" id="character-input" type="text" placeholder="Text input">
-                        </div>
-                        <div class="control">
-                            <button class="button is-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                
-                <!-- Container for displaying previous search history -->
-                <div class="card-content" id="search-history" data-search-value="container">
-                    <!-- Populated by 'renderSearchHistory' JS function -->
-                </div>
+            <!-- Form for inputting a character name to be searched -->
+            <div class="card-content">
+                <form id="character-input-form">
+                    <div class="control">
+                        <input class="input" id="character-input" type="text" placeholder="Text input">
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Container for displaying previous search history -->
+            <div class="card-content" id="search-history" data-search-value="container">
+                <!-- Populated by 'renderSearchHistory' JS function -->
+            </div>
         </div>
 
-         <!-- Search History Section 
+        <!-- Search History Section 
         <div id = "search-history"> -->
-            <!-- This will be left empty & filled from the 'renderSearchHistory' JS function -->
+        <!-- This will be left empty & filled from the 'renderSearchHistory' JS function -->
         <!-- </div> -->
         <!--  End of Search History Section  -->
 
@@ -65,8 +87,13 @@
         <!-- End of Merchandise Section -->
 
     </main>
+    <!-- footer with attribute -->
+    <footer>
+        <a href="http://marvel.com\">Data provided by Marvel. © 2021 MARVEL</a>
 
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
