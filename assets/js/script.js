@@ -167,7 +167,7 @@ historyButtonsEl.click(handleHistoryButton);
 // refrain from using this as much as possible and use the getAmazonTest() function
 function getAmazonApi(str){
     str = str.trim();
-    var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=" + str;
+    var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=Marvel " + str;
 
     fetch(api, {
         "method": "GET",
