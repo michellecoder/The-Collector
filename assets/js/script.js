@@ -219,18 +219,31 @@ function renderMerch(data) {
         
         // render the title, price and thumbnail into the element
         container.append(`
-            <div class="column is-one-fifth">
-                <a href="${shopUrl}" target="_blank">
-                    <article class="message is-dark">
-                        <div class="message-header">
-                            <p>${title}</p>
+            <div class="column is-12-mobile is-3-tablet is-3-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <a href="${shopUrl}" target="_blank">
+                                <img src="${imageUrl}" class="">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <p class="has-text-centered">
+                                <span class="title is-4 is-capitalized ">
+                                    <a href="${shopUrl}" class="has-text-black " target="_blank">
+                                        ${title}
+                                    </a>
+                                </span>
+                                    <p class="has-text-centered">
+                                        ${price}
+                                    </p>
+                                <br>
+                            </p>
                         </div>
-                        <div class="message-body">
-                            <img src="${imageUrl}"><br>
-                            <p>${price}</p>
-                        </div>
-                    </article>
-                </a>
+                    </div>
+                </div>
             </div>
         `);
     };

@@ -1,3 +1,7 @@
 .history-button {
     margin: 5px;
 }
+
+#merchandiseArea .card {
+    height: 100%;
+}
