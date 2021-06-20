@@ -24,7 +24,7 @@ function handleSubmit(event){
         console.log(data)
         // Triggers if the data recieved from request has no matching entries.
         if (data.data.count === 0) {
-            console.log("No entires by that name, check spelling and try again.")
+            console.log("No entries by that name, check spelling and try again.")
         }
         renderCharBio(data);
         addSearchHistory(data.data.results[0].name);
@@ -195,7 +195,7 @@ function getAmazonTest() {
         return response.json();
      })
      .then(function (data) {
-        console.log(data); 
+        // console.log(data); 
         renderMerch(data)
      });
 
