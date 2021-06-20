@@ -203,14 +203,14 @@ function getAmazonTest() {
 
 // takes json data from getAmazonApi function and renders to the page
 function renderMerch(data) {
-    var container = $("#merchandiseArea"); // html element reference
-    container.html(''); // clear container before appending more
-
+    
     for (var i=0; i<data.length; i++) {
         var shopUrl = data[i].detailPageURL; // url to amazon store page
         var imageUrl = data[i].imageUrl; // thumbnail of product
         var price = data[i].price; // price of product
         var title = data[i].title; // title/name of product
+        var container = $('.item-' + (i+1)); // html element reference
+        container.html(''); // clear container before appending more
 
         // if the title is very long, shortens it
         if (title.length > 35) {
@@ -219,29 +219,25 @@ function renderMerch(data) {
         
         // render the title, price and thumbnail into the element
         container.append(`
-            <div class="column is-12-mobile is-3-tablet is-3-desktop">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image">
-                            <a href="${shopUrl}" target="_blank">
-                                <img src="${imageUrl}" class="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="content">
-                            <p class="has-text-centered">
-                                <span class="title is-4 is-capitalized ">
-                                    <a href="${shopUrl}" class="has-text-black " target="_blank">
-                                        ${title}
-                                    </a>
-                                </span>
-                                    <p class="has-text-centered">
-                                        ${price}
-                                    </p>
-                                <br>
-                            </p>
-                        </div>
+            <div class="card is-clipped">
+                <div class="card-image is-pulled-right">
+                    <a href="${shopUrl}" target="_blank" class="">
+                        <img src="${imageUrl}">
+                    </a>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <p class="has-text-centered">
+                            <span class="title is-4 is-capitalized ">
+                                <a href="${shopUrl}" class="has-text-black " target="_blank">
+                                    ${title}
+                                </a>
+                            </span>
+                                <p class="has-text-centered">
+                                    ${price}
+                                </p>
+                            <br>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
 
@@ -75,13 +77,42 @@
         <!-- Merchandise Section -->
         <!-- <div id="merchandiseArea" class="columns is-multiline">This will be filled by renderMerch() function</div> -->
         <section class="section" style="background-color: #f7f7f7;">
-            <div class="container">
-                <div style="background-color: #f7f7f7;">
-                    <div class="columns is-multiline" id="merchandiseArea">
-                        <!-- renderMerch() -->
-                    </div>
+            <div class="container" style="overflow: hidden;">
+                <!-- Start Carousel -->
+                <div id="merchandise" class="carousel">
+                  <div class="item-1">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-2">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-3">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-4">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-5">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-6">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-7">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-8">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-9">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-10">
+                    <!-- rendered with js -->
+                  </div>
                 </div>
-            </div>
+                <!-- End Carousel -->
+              </div>
         </section>
 
         <!-- End of Merchandise Section -->
@@ -92,6 +123,19 @@
         <a href="http://marvel.com\">Data provided by Marvel. © 2021 MARVEL</a>
 
     </footer>
+
+    <!-- Carousel Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+    <script>
+      bulmaCarousel.attach('#merchandise', {
+        slidesToScroll: 1,
+        slidesToShow: 2,
+        loop: true,
+        autoplay: false,
+        autoplaySpeed: 3000
+      });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
