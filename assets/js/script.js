@@ -177,7 +177,7 @@ function getAmazonApi(str){
         }
     })
     .then(function (response) {
-        return response.json(); // add error handling
+        return response.json(); // TODO: add error handling if necessary
     })
     .then(function (data) {
         renderMerch(data);// pass the json data into the render function
@@ -217,7 +217,7 @@ function renderMerch(data) {
             title = title.slice(0,35) + "...";
         };
         
-        // render the title, price and thumbnail into the element
+        // render the title, price and thumbnail into the carousel elements
         container.append(`
             <div class="card is-clipped">
                 <div class="card-image is-pulled-right">
