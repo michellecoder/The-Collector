@@ -151,7 +151,7 @@ function handleHistoryButton(event) {
 
     .then(function(data){
         renderCharBio(data);
-        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
+        // getAmazonApi(clickValue); // keep this commented out to preserve amazon api calls
         getAmazonTest(); // for testing delete before submitting
         return data
     })
