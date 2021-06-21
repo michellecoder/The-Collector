@@ -1,3 +1,15 @@
 .history-button {
     margin: 5px;
 }
+
+#clear-history {
+    margin: 5px;
+}
+
+.hidden-button {
+    display: none !important;
+}
+
+.visible-button {
+    display: flex !important;
+}
