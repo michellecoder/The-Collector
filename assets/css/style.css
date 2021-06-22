@@ -1,3 +1,24 @@
+.hero {
+    height: 310px;
+    width: 100%;
+    background-image: url(/assets/images/Avengers.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    font-size: 40px;
+    font-family: 'Bangers', cursive;
+    color: rgb(245, 244, 243);
+}
+
 .history-button {
     margin: 5px;
+}
+
+div .merch-height {
+    height: 100%;
+}
+
+.card.is-clipped {
+    height: 100%;
+    border: 1px solid rgba(161, 153, 153, 0.171);
 }
