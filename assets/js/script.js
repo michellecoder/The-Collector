@@ -28,9 +28,7 @@ function handleSubmit(event){
         }
         renderCharBio(data);
         addSearchHistory(data.data.results[0].name);
-       
-        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
-        getAmazonTest(); // for testing delete before submitting
+        getAmazonApi(characterName);
         return data
     })
 }
@@ -151,8 +149,7 @@ function handleHistoryButton(event) {
 
     .then(function(data){
         renderCharBio(data);
-        // getAmazonApi(clickValue); // keep this commented out to preserve amazon api calls
-        getAmazonTest(); // for testing delete before submitting
+        getAmazonApi(clickValue);
         return data
     })
 }
@@ -164,7 +161,6 @@ historyButtonsEl.click(handleHistoryButton);
 
 // ===========================================================================================
 // make an api call to the amazon price api 
-// refrain from using this as much as possible and use the getAmazonTest() function
 function getAmazonApi(str){
     str = str.trim();
     var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=Marvel " + str;
@@ -182,23 +178,6 @@ function getAmazonApi(str){
     .then(function (data) {
         renderMerch(data);// pass the json data into the render function
     });
-};
-
-// uses the response.json or response2.json file in assets/js
-// test search term is "Spider-Man" for response.json and "Hulk" for response2.json use this to test
-// delete before submitting
-function getAmazonTest() {
-    var api = "./assets/js/response2.json";
-
-    fetch(api)
-     .then(function (response) {
-        return response.json();
-     })
-     .then(function (data) {
-        // console.log(data); 
-        renderMerch(data)
-     });
-
 };
 
 // takes json data from getAmazonApi function and renders to the page
@@ -233,10 +212,9 @@ function renderMerch(data) {
                                     ${title}
                                 </a>
                             </span>
-                                <p class="has-text-centered">
-                                    ${price}
-                                </p>
-                            <br>
+                            <p class="has-text-centered">
+                                ${price}
+                            </p>                           
                         </p>
                     </div>
                 </div>
