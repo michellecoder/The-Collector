@@ -1,9 +1,18 @@
 .history-button {
-    margin: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px
+    ;
 }
 
 #clear-history {
     margin: 5px;
+}
+
+.history-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
 }
 
 .hidden-button {

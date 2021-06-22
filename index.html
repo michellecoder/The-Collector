@@ -24,30 +24,24 @@
                 <div class="card-content">
                     <form id="character-input-form">
                         <div class="control">
-                            <input class="input" id="character-input" type="text" placeholder="Text input">
+                            <input class="input" id="character-input" type="text" placeholder="Search for a Character">
                         </div>
                         <div class="control">
                             <button class="button is-primary">Submit</button>
                         </div>
                     </form>
-                    <!-- <div class="control">
-                         <button class="button is-primary" id="clear-history">Clear History</button>
-                    </div> -->
                 </div>
                 
                 <!-- Container for displaying previous search history -->
-                <div class="card-content" id="search-history" data-search-value="container">
-                    <!-- Populated by 'renderSearchHistory' JS function -->
+                <div class="history-display">
+                    <div class="card-content" id="search-history" data-search-value="container">
+                        <!-- Populated by 'renderSearchHistory' JS function -->
+                    </div>
+                    <div id="history-reset-container" class="card-content">
+                        <button class="button is-primary" id="clear-history">Clear History</button>
+                    </div>
                 </div>
-                <div id="history-reset-container">
-                    <button class="button is-primary" id="clear-history">Clear History</button></div>
         </div>
-
-         <!-- Search History Section 
-        <div id = "search-history"> -->
-            <!-- This will be left empty & filled from the 'renderSearchHistory' JS function -->
-        <!-- </div> -->
-        <!--  End of Search History Section  -->
 
         <!--  Character Bio Section  -->
         <div id = "character-bio">

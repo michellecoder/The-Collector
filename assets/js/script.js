@@ -33,6 +33,8 @@ function handleSubmit(event){
         getAmazonTest(); // for testing delete before submitting
         return data
     })
+
+    $('#character-input').val('');
 }
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
