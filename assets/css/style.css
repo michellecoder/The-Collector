@@ -14,6 +14,11 @@
     margin: 5px;
 }
 
-#merchandiseArea .card {
+div .merch-height {
     height: 100%;
+}
+
+.card.is-clipped {
+    height: 100%;
+    border: 1px solid rgba(161, 153, 153, 0.171);
 }

@@ -173,7 +173,7 @@ function getAmazonApi(str){
         }
     })
     .then(function (response) {
-        return response.json(); // TODO: add error handling if necessary
+        return response.json(); 
     })
     .then(function (data) {
         renderMerch(data);// pass the json data into the render function
