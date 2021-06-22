@@ -51,7 +51,8 @@ div .merch-height {
 }
 
 #character-img img {
-    max-height: 400px;
+    height: 378px;
+    width: 100%;
 }
 
 #character-details {
