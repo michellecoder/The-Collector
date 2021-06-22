@@ -51,7 +51,7 @@
                             <input class="input" id="character-input" type="text" placeholder="Search for a Character">
                         </div>
                         <div class="control">
-                            <button class="button is-primary">Submit</button>
+                            <button class="button is-danger" id="submit-button">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -62,19 +62,19 @@
                         <!-- Populated by 'renderSearchHistory' JS function -->
                     </div>
                     <div id="history-reset-container" class="card-content">
-                        <button class="button is-primary" id="clear-history">Clear History</button>
+                        <button class="button is-danger" id="clear-history">Clear History</button>
                     </div>
                 </div>
         </div>
 
         <!--  Character Bio Section  -->
-        <div id="character-details" class="columns is-vcentered">
-            <div id = "character-img" class="column is-one-third">
+        <div id="character-details" class=" is-vcentered">
+            <div id = "character-img" class="">
                 <!-- This will be left empty & filled from the 'renderCharImage' JS function -->
             </div>
 
             <!--  Character Bio Section  -->
-            <div id = "character-bio" class="column is-two-thirds">
+            <div id = "character-bio" class="">
                 <!-- This will be left empty & filled from the 'renderCharBio' JS function -->
             </div>
          </div>

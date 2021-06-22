@@ -7,6 +7,9 @@
     position: relative;
     font-size: 40px;
     font-family: 'Bangers', cursive;
+}
+
+#hero  *{
     color: rgb(245, 244, 243);
 }
 
@@ -14,6 +17,10 @@
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+#submit-button {
+    margin-top: 10px;
 }
 
 #clear-history {
@@ -41,4 +48,12 @@ div .merch-height {
 .card.is-clipped {
     height: 100%;
     border: 1px solid rgba(161, 153, 153, 0.171);
+}
+
+#character-img img {
+    max-height: 400px;
+}
+
+#character-details {
+    display: flex;
 }
