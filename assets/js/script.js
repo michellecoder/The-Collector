@@ -64,6 +64,10 @@ function renderCharBio(data) {
     var charBio = charBioData.description;
     var comicCount = charBioData.comics.available
 
+    if (charBio === "") {
+        charBio = "Whoops looks like there isn't a description of this hero yet, but you can probably still buy merch."
+    }
+
     // Create template literal to append
     var charBioContent = $(`
         <!-- Hero Section to display character name -->

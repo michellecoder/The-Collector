@@ -50,11 +50,26 @@ div .merch-height {
     border: 1px solid rgba(161, 153, 153, 0.171);
 }
 
-#character-img img {
-    height: 378px;
-    width: 100%;
+#character-img {
+    margin: 0px;
+    padding: 0px;
 }
 
-#character-details {
-    display: flex;
+#character-img img {
+    border-radius: 50%;
 }
+
+/* #character-details {
+    display: flex;
+    height: 400px;
+} */
+
+#character-bio {
+    margin: 0px;
+    padding: 0px;
+    height: 100%
+}
+
+#character-bio section{
+    height: 100%;
+}  
