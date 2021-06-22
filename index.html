@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./normilization.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+    <!-- Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>The Collector</title>
 </head>
+
 <body>
+
+    <!-- Hero image header and sub header -->
+    <hero>
+        <hero-body>
+            <div class="hero-body hero is-large is-info" id="hero">
+                <p class="title is-1">
+                    The Collector <br>
+                    <span class="title is-2">A Marvel Collector's Wonderland!</span>
+                </p>
+            </div>
+        </hero-body>
+    </hero>
+
     <main>
         <!-- Card containing the search input for API request -->
         <div class="card">
@@ -44,20 +68,81 @@
         </div>
 
         <!--  Character Bio Section  -->
-        <div id = "character-bio">
-            <!-- This will be left empty & filled from the 'renderCharBio' JS function -->
-        </div>
+        <div id="character-details" class="columns is-vcentered">
+            <div id = "character-img" class="column is-one-third">
+                <!-- This will be left empty & filled from the 'renderCharImage' JS function -->
+            </div>
+
+            <!--  Character Bio Section  -->
+            <div id = "character-bio" class="column is-two-thirds">
+                <!-- This will be left empty & filled from the 'renderCharBio' JS function -->
+            </div>
+         </div>
         <!--  End of Character Bio Section  -->
 
         <!-- Merchandise Section -->
-        <div id="merchandiseArea" class="columns is-multiline">
-            <!-- This will be filled by renderMerch() function -->
-        </div>
+        <section class="section" style="background-color: #f7f7f7;">
+            <div class="container" style="overflow: hidden;">
+                <!-- Start Carousel -->
+                <div id="merchandise" class="carousel">
+                  <div class="item-1 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-2 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-3 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-4 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-5 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-6 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-7 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-8 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-9 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                  <div class="item-10 merch-height">
+                    <!-- rendered with js -->
+                  </div>
+                </div>
+                <!-- End Carousel -->
+              </div>
+        </section>
+
         <!-- End of Merchandise Section -->
 
     </main>
+    <!-- footer with attribute -->
+    <footer>
+        <a href="http://marvel.com\">Data provided by Marvel. © 2021 MARVEL</a>
+
+    </footer>
+
+    <!-- Carousel Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+    <script>
+      bulmaCarousel.attach('#merchandise', {
+        slidesToScroll: 1,
+        slidesToShow: 3,
+        loop: true,
+        autoplay: false,
+        autoplaySpeed: 3000
+      });
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
