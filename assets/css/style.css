@@ -1,7 +1,7 @@
 #hero {
     height: 310px;
     width: 100%;
-    background-image: url(/assets/images/Avengers.jpg);
+    background-image: url(./assets/images/Avengers.jpg);
     background-size: cover;
     background-position: center;
     position: relative;
