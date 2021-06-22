@@ -1,4 +1,4 @@
-.hero {
+#hero {
     height: 310px;
     width: 100%;
     background-image: url(/assets/images/Avengers.jpg);
@@ -11,9 +11,29 @@
 }
 
 .history-button {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#clear-history {
     margin: 5px;
 }
 
+.history-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.hidden-button {
+    display: none !important;
+}
+
+.visible-button {
+    display: flex !important;
+}
 div .merch-height {
     height: 100%;
 }

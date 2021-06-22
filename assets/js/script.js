@@ -32,6 +32,8 @@ function handleSubmit(event){
         getAmazonApi(characterName);
         return data
     })
+
+    $('#character-input').val('');
 }
 
 function renderCharImage(data) {
@@ -126,8 +128,17 @@ function renderSearchHistory() {
 	// Reset container
 	searchHistoryEl.html('');
 
-	// Loop through search array
-	for (i = 0; i < storedSearch.length; i++) {
+    if (storedSearch.length < 1) {
+
+        clearHistoryEl.removeClass("visible-button");
+        clearHistoryEl.addClass("hidden-button");
+
+        return;
+
+    } else {
+
+        // Loop through search array
+	    for (i = 0; i < storedSearch.length; i++) {
 
 		// Declare variable
 		var displayChar = storedSearch[i];
@@ -139,8 +150,11 @@ function renderSearchHistory() {
 
 		// Append to page
 		searchHistoryEl.append(searchHistoryContent);
-	
-	}
+
+	    }
+        clearHistoryEl.removeClass("hidden-button");
+        clearHistoryEl.addClass("visible-button");
+    }
 }
 
 // Function 'handleHistoryButton' will retrieve 'data-search-value' from a clicked history button, recall the API and pass data to 'renderCharBio'
@@ -239,6 +253,24 @@ function renderMerch(data) {
         `);
     };
 };
+
+//==================================================================
+// Function 'clearSearchHistory' will empty the local storage array and reset the html to reflect no previous searches.
+function clearSearchHistory() {
+
+    // Declare empty array
+    var searchArray =[];
+
+    // Store empty array to local storage
+    localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+
+    // Recall 'renderSearchHistory'
+    renderSearchHistory();
+}
+
+// Listener & variables for 'clearSearchHistory' click event
+var clearHistoryEl = $('#clear-history');
+clearHistoryEl.click(clearSearchHistory);
 
 
 // ---------------- On Page Load ----------------------------- //
