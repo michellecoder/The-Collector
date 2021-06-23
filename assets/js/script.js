@@ -24,15 +24,31 @@ function handleSubmit(event){
         console.log(data)
         // Triggers if the data recieved from request has no matching entries.
         if (data.data.count === 0) {
-            console.log("No entires by that name, check spelling and try again.")
+            console.log("No entries by that name, check spelling and try again.")
         }
+        renderCharImage(data);
         renderCharBio(data);
         addSearchHistory(data.data.results[0].name);
-       
-        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
-        getAmazonTest(); // for testing delete before submitting
+        getAmazonApi(characterName);
         return data
     })
+
+    $('#character-input').val('');
+}
+
+function renderCharImage(data) {
+    // image link is data.data.results[0].thumbnail.path + '.' + data.data.results[0].thumbnail.extension
+    
+    var charImgEl = $('#character-img');
+    var imgInfo = data.data.results[0].thumbnail;
+    var imgUrl = imgInfo.path + '.' + imgInfo.extension;
+
+    var charBioContent = $(`
+        <!-- Display Character Image -->
+        <img class="charImg" src=${imgUrl}>
+    `);
+
+    charImgEl.html(charBioContent);
 }
 
 // =============================================================================================================
@@ -199,15 +215,15 @@ function renderCharBio(data) {
     var charBioContent = $(`
         <!-- Hero Section to display character name -->
         <section class="hero is-medium is-danger">
-        <div class="hero-body">
-        <p class="title">
-            ${charName}
-        </p>
-        <p class="subtitle">
-            ${charBio}
-        </p>
-        </div>
-    </section>
+            <div class="hero-body">
+            <p class="title">
+                ${charName}
+            </p>
+            <p class="subtitle">
+                ${charBio}
+            </p>
+            </div>
+        </section>
 
     `);
 
@@ -260,8 +276,17 @@ function renderSearchHistory() {
 	// Reset container
 	searchHistoryEl.html('');
 
-	// Loop through search array
-	for (i = 0; i < storedSearch.length; i++) {
+    if (storedSearch.length < 1) {
+
+        clearHistoryEl.removeClass("visible-button");
+        clearHistoryEl.addClass("hidden-button");
+
+        return;
+
+    } else {
+
+        // Loop through search array
+	    for (i = 0; i < storedSearch.length; i++) {
 
 		// Declare variable
 		var displayChar = storedSearch[i];
@@ -273,8 +298,11 @@ function renderSearchHistory() {
 
 		// Append to page
 		searchHistoryEl.append(searchHistoryContent);
-	
-	}
+
+	    }
+        clearHistoryEl.removeClass("hidden-button");
+        clearHistoryEl.addClass("visible-button");
+    }
 }
 
 // Function 'handleHistoryButton' will retrieve 'data-search-value' from a clicked history button, recall the API and pass data to 'renderCharBio'
@@ -298,9 +326,9 @@ function handleHistoryButton(event) {
     })
 
     .then(function(data){
+        renderCharImage(data);
         renderCharBio(data);
-        // getAmazonApi(characterName); // keep this commented out to preserve amazon api calls
-        getAmazonTest(); // for testing delete before submitting
+        getAmazonApi(clickValue);
         return data
     })
 }
@@ -312,10 +340,9 @@ historyButtonsEl.click(handleHistoryButton);
 
 // ===========================================================================================
 // make an api call to the amazon price api 
-// refrain from using this as much as possible and use the getAmazonTest() function
 function getAmazonApi(str){
     str = str.trim();
-    var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=" + str;
+    var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=Marvel " + str;
 
     fetch(api, {
         "method": "GET",
@@ -325,64 +352,73 @@ function getAmazonApi(str){
         }
     })
     .then(function (response) {
-        return response.json(); // add error handling
+        return response.json(); 
     })
     .then(function (data) {
         renderMerch(data);// pass the json data into the render function
     });
 };
 
-// uses the response.json or response2.json file in assets/js
-// test search term is "Spider-Man" for response.json and "Hulk" for response2.json use this to test
-// delete before submitting
-function getAmazonTest() {
-    var api = "./assets/js/response2.json";
-
-    fetch(api)
-     .then(function (response) {
-        return response.json();
-     })
-     .then(function (data) {
-        console.log(data); 
-        renderMerch(data)
-     });
-
-};
-
 // takes json data from getAmazonApi function and renders to the page
 function renderMerch(data) {
-    var container = $("#merchandiseArea"); // html element reference
-    container.html(''); // clear container before appending more
-
+    
     for (var i=0; i<data.length; i++) {
         var shopUrl = data[i].detailPageURL; // url to amazon store page
         var imageUrl = data[i].imageUrl; // thumbnail of product
         var price = data[i].price; // price of product
         var title = data[i].title; // title/name of product
+        var container = $('.item-' + (i+1)); // html element reference
+        container.html(''); // clear container before appending more
 
         // if the title is very long, shortens it
         if (title.length > 35) {
             title = title.slice(0,35) + "...";
         };
         
-        // render the title, price and thumbnail into the element
+        // render the title, price and thumbnail into the carousel elements
         container.append(`
-            <div class="column is-one-fifth">
-                <a href="${shopUrl}" target="_blank">
-                    <article class="message is-dark">
-                        <div class="message-header">
-                            <p>${title}</p>
-                        </div>
-                        <div class="message-body">
-                            <img src="${imageUrl}"><br>
-                            <p>${price}</p>
-                        </div>
-                    </article>
-                </a>
+            <div class="card is-clipped">
+                <div class="card-image is-pulled-right">
+                    <a href="${shopUrl}" target="_blank" class="">
+                        <img src="${imageUrl}">
+                    </a>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <p class="has-text-centered">
+                            <span class="title is-4 is-capitalized ">
+                                <a href="${shopUrl}" class="has-text-black " target="_blank">
+                                    ${title}
+                                </a>
+                            </span>
+                            <p class="has-text-centered">
+                                ${price}
+                            </p>                           
+                        </p>
+                    </div>
+                </div>
             </div>
         `);
     };
 };
+
+//==================================================================
+// Function 'clearSearchHistory' will empty the local storage array and reset the html to reflect no previous searches.
+function clearSearchHistory() {
+
+    // Declare empty array
+    var searchArray =[];
+
+    // Store empty array to local storage
+    localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+
+    // Recall 'renderSearchHistory'
+    renderSearchHistory();
+}
+
+// Listener & variables for 'clearSearchHistory' click event
+var clearHistoryEl = $('#clear-history');
+clearHistoryEl.click(clearSearchHistory);
 
 
 // ---------------- On Page Load ----------------------------- //
