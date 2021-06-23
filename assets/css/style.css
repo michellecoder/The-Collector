@@ -17,7 +17,7 @@
     font-weight: 400;
     line-height: 1.5;
 }
-.title *{
+#main *{
     background-color: Red;
     background-size: 100%; 
     padding: 10px; 
