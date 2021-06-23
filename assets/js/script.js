@@ -21,7 +21,6 @@ function handleSubmit(event){
     })
     // Placeholder for next step in the chain.
     .then(function(data){
-        console.log(data)
         // Triggers if the data recieved from request has no matching entries.
         if (data.data.count === 0) {
             console.log("No entries by that name, check spelling and try again.")
@@ -127,7 +126,6 @@ function autocomplete(inputElement) {
         for (var i = 0; i < resultsArray.length; i++){
             namesArray[i] = resultsArray[i].name
         }
-        console.log(namesArray)
         return namesArray;
     }
 
