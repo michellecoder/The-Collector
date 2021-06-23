@@ -28,9 +28,9 @@
     <hero>
         <hero-body>
             <div class="hero-body hero is-large is-info" id="hero">
-                <p class="title is-1">
+                <p class="title is-1" id = "main">
                     The Collector <br>
-                    <span class="title is-2">A Marvel Collector's Wonderland!</span>
+                    <span class="title is-2" id = "heading">A Marvel Collector's Wonderland!</span>
                 </p>
             </div>
         </hero-body>
@@ -40,12 +40,29 @@
         <!-- Card containing the search input for API request -->
         <div class="card">
             <header class="card-header">
-                <p class="card-header-title">
+                <!-- <p class="card-header-title">
                     Search The Marvel Universe
-                </p>
+                </p> -->
+            <form id="character-input-form" style = "width: 100%">
+            <div id = "container" style = "width: 100%" class="columns is-gapless is-vcentered is-mobile">
+              <div class = "column is-4" >
+                <p class="card-header-title">
+                  Search The Marvel Universe
+              </p>
+              </div>
+             
+              <div class="column search is-5">
+                  <input class="input" id="character-input" type="text" placeholder="Search for a Character">
+              </div>
+                <div class="control column is-3">
+                  <button class="button is-danger" id="submit-button">Submit</button>
+              </div>
+           
+            </div>
+            </form> 
             </header>
                 <!-- Form for inputting a character name to be searched -->
-                <div class="card-content">
+                <!-- <div class="card-content">
                     <form id="character-input-form">
                         <div class="control">
                             <input class="input" id="character-input" type="text" placeholder="Search for a Character">
@@ -54,7 +71,7 @@
                             <button class="button is-danger" id="submit-button">Submit</button>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 
                 <!-- Container for displaying previous search history -->
                 <div class="history-display">
