@@ -1,4 +1,4 @@
-.hero {
+#hero {
     height: 310px;
     width: 100%;
     background-image: url(/assets/images/Avengers.jpg);
@@ -11,9 +11,63 @@
 }
 
 .history-button {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#clear-history {
     margin: 5px;
 }
 
+/* Autocomplete CSS starts below */
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    /* display: inline-block; */
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+.history-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.hidden-button {
+    display: none !important;
+}
+
+.visible-button {
+    display: flex !important;
+}
 div .merch-height {
     height: 100%;
 }
@@ -21,9 +75,4 @@ div .merch-height {
 .card.is-clipped {
     height: 100%;
     border: 1px solid rgba(161, 153, 153, 0.171);
-}
-
-#middleSection * {
-    height: 100%;
-
 }

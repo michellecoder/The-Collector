@@ -27,7 +27,7 @@
     <!-- Hero image header and sub header -->
     <hero>
         <hero-body>
-            <div class="hero-body hero is-large is-info">
+            <div class="hero-body hero is-large is-info" id="hero">
                 <p class="title is-1">
                     The Collector <br>
                     <span class="title is-2">A Marvel Collector's Wonderland!</span>
@@ -44,41 +44,40 @@
                     Search The Marvel Universe
                 </p>
             </header>
-            <!-- Form for inputting a character name to be searched -->
-            <div class="card-content">
-                <form id="character-input-form">
-                    <div class="control">
-                        <input class="input" id="character-input" type="text" placeholder="Text input">
+                <!-- Form for inputting a character name to be searched -->
+                <div class="card-content">
+                    <form id="character-input-form" autocomplete="off">
+                        <div class="control autocomplete">
+                            <input class="input" id="character-input" type="text" name="hero-names" placeholder="Search for a Character">
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Container for displaying previous search history -->
+                <div class="history-display">
+                    <div class="card-content" id="search-history" data-search-value="container">
+                        <!-- Populated by 'renderSearchHistory' JS function -->
                     </div>
-                    <div class="control">
-                        <button class="button is-primary">Submit</button>
+                    <div id="history-reset-container" class="card-content">
+                        <button class="button is-primary" id="clear-history">Clear History</button>
                     </div>
-                </form>
-            </div>
-
-            <!-- Container for displaying previous search history -->
-            <div class="card-content" id="search-history" data-search-value="container">
-                <!-- Populated by 'renderSearchHistory' JS function -->
-            </div>
+                </div>
         </div>
 
-        <!-- Search History Section 
-        <div id = "search-history"> -->
-        <!-- This will be left empty & filled from the 'renderSearchHistory' JS function -->
-        <!-- </div> -->
-        <!--  End of Search History Section  -->
-        <section class="section" id="middleSection">
-          <div id="character-details" class="columns is-vcentered">
-              <div id = "character-img" class="column is-one-third">
-                  <!-- This will be left empty & filled from the 'renderCharImage' JS function -->
-              </div>
+        <!--  Character Bio Section  -->
+        <div id="character-details" class="columns is-vcentered">
+            <div id = "character-img" class="column is-one-third">
+                <!-- This will be left empty & filled from the 'renderCharImage' JS function -->
+            </div>
 
-              <!--  Character Bio Section  -->
-              <div id = "character-bio" class="column is-two-thirds">
-                  <!-- This will be left empty & filled from the 'renderCharBio' JS function -->
-              </div>
-          </div>
-        </section>
+            <!--  Character Bio Section  -->
+            <div id = "character-bio" class="column is-two-thirds">
+                <!-- This will be left empty & filled from the 'renderCharBio' JS function -->
+            </div>
+         </div>
         <!--  End of Character Bio Section  -->
 
         <!-- Merchandise Section -->

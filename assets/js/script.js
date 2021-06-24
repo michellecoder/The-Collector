@@ -21,7 +21,6 @@ function handleSubmit(event){
     })
     // Placeholder for next step in the chain.
     .then(function(data){
-        console.log(data)
         // Triggers if the data recieved from request has no matching entries.
         if (data.data.count === 0) {
             console.log("No entries by that name, check spelling and try again.")
@@ -32,6 +31,8 @@ function handleSubmit(event){
         getAmazonApi(characterName);
         return data
     })
+
+    $('#character-input').val('');
 }
 
 function renderCharImage(data) {
@@ -48,6 +49,153 @@ function renderCharImage(data) {
 
     charImgEl.html(charBioContent);
 }
+
+// =============================================================================================================
+// Autocomplete work starts here:
+
+function autocomplete(inputElement) {
+    // Autocomplete funciton takes in one value. An input element wrapped in jquery.
+    // currentFocus is a global variable used to help with making the autocomplete keyboard accessible.
+    var currentFocus;
+
+    // Function will execute on any input in the supplied element.
+    inputElement.on('input', function (event) {
+        // Sets two scoped variables for later use then makes sure that any previous autocomplete list is closed.
+        var autocompleteList;
+        var currentInputValue = this.value;
+        closeAllLists();
+
+        // Checks if there is a value in the input field. If not fuction halts.
+        if (!currentInputValue) {
+            return false
+        };
+
+        currentFocus = -1;
+
+        autocompleteList = $(`<div class="autocomplete-items" id="${this.id}-autocomplete-list" ></div>`);
+        $(this).parent().append(autocompleteList);
+
+        var autocompleteRequestUrl = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${currentInputValue}&apikey=${marvelApiKey}`
+
+        // Request to Marvel API in order to get valid names starting with currentInputValue
+        fetch(autocompleteRequestUrl)
+        .then(function(response){
+            // Basic error handling, needs refinement based on return code.
+            if (response.status !== 200) {
+                console.log('Error, check response for more info')
+                console.log(response)
+                return 
+            }
+            return response.json()
+        })
+        .then(function(data){
+            var arr = getValidNames(data)
+            createAutocompleteItems(autocompleteList, currentInputValue, arr)
+        })
+    });
+
+    function createAutocompleteItems(autocompleteList, currentInputValue, arr){
+        var autocompleteItem;
+
+        for (var i = 0; i < arr.length; i++) {
+            // Extra check in case the api returns entries which do not begin with the correct substring
+            if (arr[i].substr(0, currentInputValue.length).toUpperCase() == currentInputValue.toUpperCase()) {
+                autocompleteItem = $(
+                                    `
+                                    <div>
+                                        <strong>${arr[i].substr(0, currentInputValue.length)}</strong>${arr[i].substr(currentInputValue.length)}
+                                        <input type="hidden" value="${arr[i]}"
+                                    </div>
+                                    `);
+                
+                // Click event populates input with clicked text value
+                autocompleteItem.click(function (e) {
+                    inputElement.val(this.getElementsByTagName("input")[0].value);
+                    closeAllLists();
+                });
+
+                autocompleteList.append(autocompleteItem);
+            }
+        }
+    }
+
+    function getValidNames(apiData) {
+        // Takes a Marvel API repsonse's json data and extracts only the names to an array.
+        var resultsArray = apiData.data.results;
+        var namesArray = [];
+        for (var i = 0; i < resultsArray.length; i++){
+            namesArray[i] = resultsArray[i].name
+        }
+        return namesArray;
+    }
+
+    inputElement.keydown(function (event) {
+        var autocompleteList = document.getElementById(`${this.id}-autocomplete-list`);
+
+        if (autocompleteList) {
+            autocompleteList = autocompleteList.getElementsByTagName("div");
+        }
+
+        if (event.keyCode == 40) {
+            // Triggers if down key is pressed; moves the focused area down the list.
+            currentFocus++;
+            addActive(autocompleteList);
+        } else if (event.keyCode == 38) { //up
+            // Triggers if up key is pressed; moves the focused area up the list.
+            currentFocus--;
+            addActive(autocompleteList);
+        } else if (event.keyCode == 13) {
+            // Triggers if enter key is pressed; moves the focused area down the list.
+            event.preventDefault();
+            if (currentFocus > -1) {
+                if (autocompleteList) {
+                    autocompleteList[currentFocus].click();}
+            }
+        }
+    });
+
+    function addActive(autocompleteItems) {
+        // Helper function to add active class to autocomplete items
+        if (!autocompleteItems) {
+            return false
+        };
+
+        removeActive(autocompleteItems);
+
+        // Handles behavior at beginning and end of list
+        if (currentFocus >= autocompleteItems.length) {
+            currentFocus = 0
+        };
+        if (currentFocus < 0) {
+            currentFocus = (autocompleteItems.length - 1)
+        };
+
+        autocompleteItems[currentFocus].classList.add("autocomplete-active");
+    }
+
+    function removeActive(autocompleteItems) {
+        for (var i = 0; i < autocompleteItems.length; i++) {
+            autocompleteItems[i].classList.remove("autocomplete-active");
+        }
+    }
+
+    function closeAllLists(htmlElement) {
+        var autocompleteItems = $(".autocomplete-items");
+        for (var i = 0; i < autocompleteItems.length; i++) {
+            if (htmlElement != autocompleteItems[i] && htmlElement != inputElement) {
+                autocompleteItems[i].remove();
+            }
+        }
+    }
+
+    document.addEventListener("click", function (event) {
+        closeAllLists(event.target);
+    });
+}
+
+autocomplete($("#character-input"))
+// Autocomplete work ends here:
+// =============================================================================================================
 
 // Function 'renderCharBio' -> This function will accept the data object from the fetch request & will pull out and display relevant bio data to the '#character-bio' div.
 function renderCharBio(data) {
@@ -126,8 +274,17 @@ function renderSearchHistory() {
 	// Reset container
 	searchHistoryEl.html('');
 
-	// Loop through search array
-	for (i = 0; i < storedSearch.length; i++) {
+    if (storedSearch.length < 1) {
+
+        clearHistoryEl.removeClass("visible-button");
+        clearHistoryEl.addClass("hidden-button");
+
+        return;
+
+    } else {
+
+        // Loop through search array
+	    for (i = 0; i < storedSearch.length; i++) {
 
 		// Declare variable
 		var displayChar = storedSearch[i];
@@ -139,8 +296,11 @@ function renderSearchHistory() {
 
 		// Append to page
 		searchHistoryEl.append(searchHistoryContent);
-	
-	}
+
+	    }
+        clearHistoryEl.removeClass("hidden-button");
+        clearHistoryEl.addClass("visible-button");
+    }
 }
 
 // Function 'handleHistoryButton' will retrieve 'data-search-value' from a clicked history button, recall the API and pass data to 'renderCharBio'
@@ -239,6 +399,24 @@ function renderMerch(data) {
         `);
     };
 };
+
+//==================================================================
+// Function 'clearSearchHistory' will empty the local storage array and reset the html to reflect no previous searches.
+function clearSearchHistory() {
+
+    // Declare empty array
+    var searchArray =[];
+
+    // Store empty array to local storage
+    localStorage.setItem("marvelSearchHistory", JSON.stringify(searchArray));
+
+    // Recall 'renderSearchHistory'
+    renderSearchHistory();
+}
+
+// Listener & variables for 'clearSearchHistory' click event
+var clearHistoryEl = $('#clear-history');
+clearHistoryEl.click(clearSearchHistory);
 
 
 // ---------------- On Page Load ----------------------------- //
