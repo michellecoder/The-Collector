@@ -43,7 +43,7 @@
                 <!-- <p class="card-header-title">
                     Search The Marvel Universe
                 </p> -->
-            <form id="character-input-form" style = "width: 100%">
+            <form id="character-input-form" style = "width: 100%" autocomplete="off">
             <div id = "container" style = "width: 100%" class="columns is-gapless is-vcentered is-mobile">
               <div class = "column is-4" >
                 <p class="card-header-title">
@@ -51,8 +51,8 @@
               </p>
               </div>
              
-              <div class="column search is-5">
-                  <input class="input" id="character-input" type="text" placeholder="Search for a Character">
+              <div class="column search is-5 autocomplete">
+                  <input class="input" id="character-input" type="text" name="hero-names" placeholder="Search for a Character">
               </div>
                 <div class="control column is-3">
                   <button class="button is-danger" id="submit-button">Submit</button>
@@ -61,17 +61,6 @@
             </div>
             </form> 
             </header>
-                <!-- Form for inputting a character name to be searched -->
-                <!-- <div class="card-content">
-                    <form id="character-input-form">
-                        <div class="control">
-                            <input class="input" id="character-input" type="text" placeholder="Search for a Character">
-                        </div>
-                        <div class="control">
-                            <button class="button is-danger" id="submit-button">Submit</button>
-                        </div>
-                    </form>
-                </div> -->
                 
                 <!-- Container for displaying previous search history -->
                 <div class="history-display">
