@@ -207,7 +207,12 @@ function renderCharBio(data) {
     var charBioData = data.data.results[0];
     var charName = charBioData.name;
     var charBio = charBioData.description;
-    var comicCount = charBioData.comics.available
+    var comicCount = charBioData.comics.available;
+    var seriesCount = charBioData.series.available;
+    var storyCount = charBioData.stories.available;
+    var eventCount = charBioData.events.available;
+    var wikiLink = charBioData.urls[1].url;
+    var comicLink = charBioData.urls[2].url;
 
     // Create template literal to append
     var charBioContent = $(`
@@ -219,6 +224,12 @@ function renderCharBio(data) {
             </p>
             <p class="subtitle">
                 ${charBio}
+            </p>
+            <p class="subtitle">
+                ${charName} appears in ${comicCount} comics, ${seriesCount} series, ${storyCount} stories, and ${eventCount} events!
+            </p>
+            <p class="subtitle">
+                Learn more about ${charName} by visiting the following links: <a href="${wikiLink}" target="_blank" class="link-underline">${charName} Wiki</a> & <a href="${comicLink}" target="_blank" class="link-underline">${charName} Comics</a>.
             </p>
             </div>
         </section>
