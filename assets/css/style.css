@@ -1,19 +1,37 @@
 #hero {
     height: 310px;
     width: 100%;
-    background-image: url(/assets/images/Avengers.jpg);
+    background-image: url(../images/marvel-characters.jpg);
     background-size: cover;
-    background-position: center;
+    /* background-position:center top; */
     position: relative;
-    font-size: 40px;
+    font-size: 45px;
     font-family: 'Bangers', cursive;
+    text-align: center;
+}
+
+#hero  *{
     color: rgb(245, 244, 243);
+    background-position: right;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+#main *{
+    background-color: Red;
+    background-size: 100%; 
+    padding: 10px; 
 }
 
 .history-button {
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+#submit-button {
+    margin-left: 10px;
+    
 }
 
 #clear-history {
@@ -76,6 +94,39 @@ div .merch-height {
     height: 100%;
     border: 1px solid rgba(161, 153, 153, 0.171);
 }
+.search {
+    margin-right: 25px;
+    box-sizing: 10%;
+    width: 10%;
+    
+}
+.control {   
+ margin-left: 50%;
+}
+
+#character-input {
+    width: 50%;
+    float: right;
+    
+}
+#character-img {
+    margin: 0px;
+    padding: 0px;
+}
+
+#character-img img {
+    border-radius: 50%;
+}
+
+#character-bio {
+    margin: 0px;
+    padding: 0px;
+    height: 100%
+}
+
+#character-bio section{
+    height: 100%;
+}  
 
 .link-underline {
     text-decoration: underline;

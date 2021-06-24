@@ -214,6 +214,10 @@ function renderCharBio(data) {
     var wikiLink = charBioData.urls[1].url;
     var comicLink = charBioData.urls[2].url;
 
+    if (charBio === "") {
+        charBio = "Whoops looks like there isn't a description of this hero yet, but you can probably still buy merch."
+    }
+
     // Create template literal to append
     var charBioContent = $(`
         <!-- Hero Section to display character name -->
@@ -349,6 +353,7 @@ historyButtonsEl.click(handleHistoryButton);
 
 // ===========================================================================================
 // make an api call to the amazon price api 
+
 function getAmazonApi(str){
     str = str.trim();
     var api = "https://amazon-price1.p.rapidapi.com/search?marketplace=US&keywords=Marvel " + str;
