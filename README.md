@@ -20,7 +20,7 @@ Built in Visual Studio with:
 ## How to
 When the application is loaded, enter a character in the search bar. The search bar autocomplete function will help users explore new characters & ensure accurate spelling of character names. Pressing the 'Submit' button will call both the Marvel API & Amazon Price API for the selected character. A character picture, biography data (if available), comic data, and links to the character wiki & comic pages are displayed to the page. A carousel of popular character merchandise, available for purchase from Amazon, is displayed below the character info section. The searched character is added to local storage and displayed as a searchable button below the search bar. The user can press the button of a previously searched character to recall that characer's information. Pressing the 'Clear History' button will clear all previously searched characters from local storage and remove all searchable character buttons from the page.
 
-![The Collector Home Page 1](./assets/images/screenshot1.PNG)
+![The Collector Home Page 1](./assets/images/screenshot3.png)
 
 ## User Story
 Given the following user stories:
