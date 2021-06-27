@@ -374,6 +374,9 @@ function getAmazonApi(str){
                 <p class="has-text-centered title is-4">
                     Sorry! Merchandise links unavailable at this time
                 </p>
+                <p class="has-text-centered subtitle is-6">
+                    (The dev team is currently searching for a replacement API)
+                </p>
         `);
         } else {
             return response.json(); 
