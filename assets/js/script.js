@@ -366,7 +366,18 @@ function getAmazonApi(str){
         }
     })
     .then(function (response) {
-        return response.json(); 
+        console.log(response.status === 403);
+        if (response.status === 403) {
+            let container = $('#merchandise');
+            container.html('');
+            container.append(`
+                <p class="has-text-centered title is-4">
+                    Sorry! Merchandise links unavailable at this time
+                </p>
+        `);
+        } else {
+            return response.json(); 
+        }
     })
     .then(function (data) {
         renderMerch(data);// pass the json data into the render function
